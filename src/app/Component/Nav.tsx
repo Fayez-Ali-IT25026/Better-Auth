@@ -7,6 +7,7 @@ export default function Nav() {
       <Link href="/dashboard">Dashboard</Link>
       <Link href="/signin">Sign in</Link>
       <Link href="/signup">Sign up</Link>
+      <Link href="/signout">Sign out</Link>
     </nav>
   );
 }

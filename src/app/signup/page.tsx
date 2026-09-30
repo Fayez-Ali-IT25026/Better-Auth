@@ -9,8 +9,11 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
 
 
+
+  // Handle sign-up form submission
+
    const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault(); //have to prevent the default form submission behavior like page reload
     const { data, error } = await authClient.signUp.email({
     name: name,
     email: email,
@@ -19,7 +22,7 @@ const SignUp = () => {
     
   }, {
         onRequest: (ctx) => {
-            console.log("Sign-up request initiated", ctx);
+            console.log("Sign-up request initiated", ctx); //display the request context in the console for debugging purposes
         },
         onSuccess: (ctx) => {
             console.log("Sign-up successful", ctx);
@@ -34,12 +37,16 @@ const SignUp = () => {
   console.log(data); 
 };
 
+
+
+// Render the sign-up form here
+
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="w-full max-w-sm rounded-lg border p-6">
         <h1 className="mb-6 text-2xl font-bold">Sign Up</h1>
 
-        <form className="space-y-4" onSubmit={handleSignUp}>
+        <form className="space-y-4" onSubmit={handleSignUp}> 
           <input
             type="text"
             placeholder="Name"
