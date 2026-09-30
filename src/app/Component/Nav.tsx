@@ -4,6 +4,10 @@ import Link from "next/link";
 import { BookOpen } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 
+// Import the SignOut component
+import SignOut from "../signout/page";
+
+
 
 
 
@@ -88,13 +92,37 @@ import { authClient } from "@/lib/auth-client";
 
 export default function Nav() {
 //step 1: use the useSession hook to get the current session (from the better-auth documentation)
-  const { data: session } = authClient.useSession()
+  const { data: session , isPending } = authClient.useSession()
+
+//For SOme REason
+if (isPending) {
+    return <>Loading...</> 
+}
+
+
+
+
 //step 2: use a conditional statement to check if the user is authenticated
   const authLink = <>
 {
 
     session?.user ? <>
         Welcome {session.user.name}
+
+         {/* <Link
+            href="/signout"
+            className="rounded-lg px-4 py-2 text-red-400 transition hover:bg-red-950"
+          >
+            Sign out
+          </Link> */}
+
+
+         {/* // Render the SignOut component when the user is authenticated */}
+         <SignOut />
+
+
+         
+    
     </> :
     <>
     <Link
@@ -179,12 +207,12 @@ export default function Nav() {
           </Link> */}
 
 
-          <Link
+          {/* <Link
             href="/signout"
             className="rounded-lg px-4 py-2 text-red-400 transition hover:bg-red-950"
           >
             Sign out
-          </Link>
+          </Link> */}
         </div>
 
       </div>
